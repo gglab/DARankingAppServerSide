@@ -1,0 +1,40 @@
+entity TripAward{
+	name String required,
+    description String,
+    points Double required
+}
+
+entity DriverAward{
+	name String required,
+    description String,
+    points Double required
+}
+
+entity Trip{
+	start ZonedDateTime required,
+	duration String required,
+    distance Long required,
+    speedingDistance Long required,
+    maxSpeedingVelocity Integer required,
+    suddenBrakings Integer required,
+    suddenAccelerations Integer required,
+    points Double,
+}
+
+entity Driver{
+	rank Double required,
+    name String required
+}
+
+relationship ManyToOne{
+	Trip{driver(name)} to Driver
+}
+
+relationship ManyToMany{
+	Trip{awards(name)} to TripAward,
+    Driver{awards(name)} to DriverAward{drivers(name)}
+}
+
+relationship OneToOne{
+	Driver{user(login)} to User
+}

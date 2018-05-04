@@ -1,0 +1,13 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [],
+    "changelogDate": "20180503054459",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "gis_speeding_limit",
+    "jpaMetamodelFiltering": false,
+    "pagination": "no",
+    "microserviceName": "DAGisMS",
+    "searchEngine": false
+}

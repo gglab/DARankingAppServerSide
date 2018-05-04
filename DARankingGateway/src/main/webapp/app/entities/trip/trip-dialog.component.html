@@ -1,0 +1,146 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myTripLabel">Create or edit a Trip</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!trip.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="trip.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_start">Start</label>
+            <div class="d-flex">
+                <input id="field_start" type="datetime-local" class="form-control" name="start" [(ngModel)]="trip.start"
+                required/>
+            </div>
+            <div [hidden]="!(editForm.controls.start?.dirty && editForm.controls.start?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.start?.errors?.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.start?.errors?.ZonedDateTimelocal">
+                    This field should be a date and time.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_duration">Duration</label>
+            <input type="text" class="form-control" name="duration" id="field_duration"
+                [(ngModel)]="trip.duration" required/>
+            <div [hidden]="!(editForm.controls.duration?.dirty && editForm.controls.duration?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.duration?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_distance">Distance</label>
+            <input type="number" class="form-control" name="distance" id="field_distance"
+                [(ngModel)]="trip.distance" required/>
+            <div [hidden]="!(editForm.controls.distance?.dirty && editForm.controls.distance?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.distance?.errors?.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.distance?.errors?.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_speedingDistance">Speeding Distance</label>
+            <input type="number" class="form-control" name="speedingDistance" id="field_speedingDistance"
+                [(ngModel)]="trip.speedingDistance" required/>
+            <div [hidden]="!(editForm.controls.speedingDistance?.dirty && editForm.controls.speedingDistance?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.speedingDistance?.errors?.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.speedingDistance?.errors?.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_maxSpeedingVelocity">Max Speeding Velocity</label>
+            <input type="number" class="form-control" name="maxSpeedingVelocity" id="field_maxSpeedingVelocity"
+                [(ngModel)]="trip.maxSpeedingVelocity" required/>
+            <div [hidden]="!(editForm.controls.maxSpeedingVelocity?.dirty && editForm.controls.maxSpeedingVelocity?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.maxSpeedingVelocity?.errors?.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.maxSpeedingVelocity?.errors?.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_suddenBrakings">Sudden Brakings</label>
+            <input type="number" class="form-control" name="suddenBrakings" id="field_suddenBrakings"
+                [(ngModel)]="trip.suddenBrakings" required/>
+            <div [hidden]="!(editForm.controls.suddenBrakings?.dirty && editForm.controls.suddenBrakings?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.suddenBrakings?.errors?.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.suddenBrakings?.errors?.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_suddenAccelerations">Sudden Accelerations</label>
+            <input type="number" class="form-control" name="suddenAccelerations" id="field_suddenAccelerations"
+                [(ngModel)]="trip.suddenAccelerations" required/>
+            <div [hidden]="!(editForm.controls.suddenAccelerations?.dirty && editForm.controls.suddenAccelerations?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.suddenAccelerations?.errors?.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.suddenAccelerations?.errors?.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_points">Points</label>
+            <input type="number" class="form-control" name="points" id="field_points"
+                [(ngModel)]="trip.points" />
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" for="field_driver">Driver</label>
+            <select class="form-control" id="field_driver" name="driver" [(ngModel)]="trip.driver" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="driverOption.id === trip.driver?.id ? trip.driver : driverOption" *ngFor="let driverOption of drivers; trackBy: trackDriverById">{{driverOption.name}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_awards">Awards</label>
+            <select class="form-control" id="field_awards" multiple name="awards" [(ngModel)]="trip.awards">
+                <option [ngValue]="getSelected(trip.awards, tripAwardOption)" *ngFor="let tripAwardOption of tripawards; trackBy: trackTripAwardById">{{tripAwardOption.name}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

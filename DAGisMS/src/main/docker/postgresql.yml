@@ -1,0 +1,11 @@
+version: '2'
+services:
+    dagisms-postgresql:
+        image: postgres:9.6.8
+        # volumes:
+        #     - ~/volumes/jhipster/DAGisMS/postgresql/:/var/lib/postgresql/data/
+        environment:
+            - POSTGRES_USER=postgis
+            - POSTGRES_PASSWORD=postgis
+        ports:
+            - 5432:5432

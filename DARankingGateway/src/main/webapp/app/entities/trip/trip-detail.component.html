@@ -1,0 +1,66 @@
+
+<div *ngIf="trip">
+    <h2><span>Trip</span> {{trip.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Start</span></dt>
+        <dd>
+            <span>{{trip.start | date:'medium'}}</span>
+        </dd>
+        <dt><span>Duration</span></dt>
+        <dd>
+            <span>{{trip.duration}}</span>
+        </dd>
+        <dt><span>Distance</span></dt>
+        <dd>
+            <span>{{trip.distance}}</span>
+        </dd>
+        <dt><span>Speeding Distance</span></dt>
+        <dd>
+            <span>{{trip.speedingDistance}}</span>
+        </dd>
+        <dt><span>Max Speeding Velocity</span></dt>
+        <dd>
+            <span>{{trip.maxSpeedingVelocity}}</span>
+        </dd>
+        <dt><span>Sudden Brakings</span></dt>
+        <dd>
+            <span>{{trip.suddenBrakings}}</span>
+        </dd>
+        <dt><span>Sudden Accelerations</span></dt>
+        <dd>
+            <span>{{trip.suddenAccelerations}}</span>
+        </dd>
+        <dt><span>Points</span></dt>
+        <dd>
+            <span>{{trip.points}}</span>
+        </dd>
+        <dt><span>Driver</span></dt>
+        <dd>
+            <div *ngIf="trip.driver">
+                <a [routerLink]="['/driver', trip.driver?.id]">{{trip.driver?.name}}</a>
+            </div>
+        </dd>
+        <dt><span>Awards</span></dt>
+        <dd>
+            <span *ngFor="let awards of trip.awards; let last = last">
+                <a [routerLink]="['/trip-award', awards?.id ]">{{awards.name}}</a>{{last ? '' : ', '}}
+            </span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'trip/'+ trip.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

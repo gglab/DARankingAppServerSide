@@ -1,0 +1,83 @@
+<div class="row">
+    <div class="col-md-3">
+        <div [ngSwitch]="isAuthenticated()">
+            <h4>
+                <div class="alert alert-success" *ngSwitchCase="true">
+                    <span *ngIf="account"> You are logged in as "{{account.login}}"</span>
+                </div>
+                <div class="alert alert-warning" *ngSwitchCase="false"><a class="alert-link" (click)="login()">login</a> </div>
+            </h4>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <h1 class="display-4">Driving Analytics Ranking App</h1>
+    </div>
+</div>
+<hr class="style1">
+<div class="row">
+    </br>
+    <div class="col-md-3">
+            <div class="table-responsive" *ngIf="drivers" >
+                <p class="lead">Drivers Ranking</p>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th><span>Driver</span></th>
+                        <th><span>Points</span></th>
+                        <th><span>Awards</span></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let driver of drivers | orderBy: 'rank' : 'true' ;trackBy: trackDriverRank">
+                        <td>{{driver.name}}</td>
+                        <td>{{driver.rank | number}}</td>
+                        <td>
+                            <span *ngFor="let awards of driver.awards; let last = last">
+                                <a [routerLink]="['/driver-award', awards?.id ]">{{awards.name}}</a>{{last ? '' : ', '}}
+                            </span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+    </div>
+    <div class="col-md-9">
+        <div class="table-responsive" *ngIf="trips">
+            <p class="lead">Your trips</p>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th><span>Start date/time</span></th>
+                    <th><span>T (min)</span></th>
+                    <th><span>L (km)</span></th>
+                    <th><span>Speeding L (km)</span></th>
+                    <th><span>Max Speeding (km/h)</span></th>
+                    <th><span># Braking</span></th>
+                    <th><span># Accelerations</span></th>
+                    <th><span>Points</span></th>
+                    <th><span>Awards</span></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let trip of trips | orderBy: 'start' : 'false';trackBy: trackTripDate">
+                    <td><a [routerLink]="['../trip', trip.id ]">{{trip.start | date:'medium'}}</a></td>
+                    <td>{{trip.duration}}</td>
+                    <td>{{trip.distance}}</td>
+                    <td>{{trip.speedingDistance}}</td>
+                    <td>{{trip.maxSpeedingVelocity}}</td>
+                    <td>{{trip.suddenBrakings}}</td>
+                    <td>{{trip.suddenAccelerations}}</td>
+                    <td>{{trip.points | number}}</td>
+                    <td>
+                    <span *ngFor="let awards of trip.awards; let last = last">
+                            <a class="form-control-static" [routerLink]="['../trip-award', awards?.id ]">{{awards.name}}</a>{{last ? '' : ', '}}
+                        </span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</div>
