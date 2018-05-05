@@ -10,7 +10,7 @@
         </div>
     </div>
     <div class="col-md-9">
-        <h1 class="display-4">Driving Analytics Ranking App</h1>
+        <h1 class="display-4">Driving Analytics Ranking Application</h1>
     </div>
 </div>
 <hr class="style1">
@@ -48,10 +48,10 @@
                 <thead>
                 <tr>
                     <th><span>Start date/time</span></th>
-                    <th><span>T (min)</span></th>
-                    <th><span>L (km)</span></th>
-                    <th><span>Speeding L (km)</span></th>
-                    <th><span>Max Speeding (km/h)</span></th>
+                    <th><span>Time</span></th>
+                    <th><span>L [m]</span></th>
+                    <th><span>Speeding L [m]</span></th>
+                    <th><span>Max Speeding [km/h]</span></th>
                     <th><span># Braking</span></th>
                     <th><span># Accelerations</span></th>
                     <th><span>Points</span></th>
@@ -62,8 +62,8 @@
                 <tr *ngFor="let trip of trips | orderBy: 'start' : 'false';trackBy: trackTripDate">
                     <td><a [routerLink]="['../trip', trip.id ]">{{trip.start | date:'medium'}}</a></td>
                     <td>{{trip.duration}}</td>
-                    <td>{{trip.distance}}</td>
-                    <td>{{trip.speedingDistance}}</td>
+                    <td>{{trip.distance | number:0}}</td>
+                    <td>{{trip.speedingDistance | number:0}}</td>
                     <td>{{trip.maxSpeedingVelocity}}</td>
                     <td>{{trip.suddenBrakings}}</td>
                     <td>{{trip.suddenAccelerations}}</td>
